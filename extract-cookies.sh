@@ -4,10 +4,10 @@
 output_file="cookies.txt"
 
 # Loop to send 100 requests
-for ((i=1; i<=100; i++))
+for ((i=1; i<=$1; i++))
 do
     # Sending a request to the URL
-    response=$(curl -s "http://ubuntu:4400/1")
+    response=$(curl -s "http://ubuntu:4400/1" -i)
 
     # Extracting the "example1-session" cookie from the response
     cookie=$(echo "$response" | grep -oP '(?<=example1-session=)[^;]+')
