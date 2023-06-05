@@ -15,7 +15,7 @@ def cd(command):
     res = requests.post(url, data=d)
     return res.json()['output'].replace('\n', '')
 
-def copy_from_host(source, destination):
+def upload(source, destination):
     output_command = 'echo \"'
     with open(source, 'r') as source_file:
         for l in source_file.readlines():
@@ -25,6 +25,12 @@ def copy_from_host(source, destination):
     output_command+='\" > '+destination
     execute_remotely(output_command)
 
+def download(source, destination):
+    file_content = execute_remotely('cat '+source)
+    with open(destination, 'w') as file:
+        file.write(file_content)
+
+
 path = cd('cd ./')
 
 
@@ -33,12 +39,16 @@ while 1:
     command = input()
     if command == 'exit':
         break
-    if command[0:2] == 'cd':
+    if command.split(' ')[0] == 'cd':
         path = cd(command)
-    if command[0:3] == 'hcp':
+    if command.split(' ')[0] == 'upload':
         source_file = command.split(' ')[1]
         destination_file = command.split(' ')[2]
-        copy_from_host(source_file, destination_file)
+        upload(source_file, destination_file)
+    if command.split(' ')[0] == 'download':
+        source_file = command.split(' ')[1]
+        destination_file = command.split(' ')[2]
+        download(source_file, destination_file)
     else:
         output = execute_remotely(command)
         print(output)

@@ -3,7 +3,9 @@
 # Output file for storing cookies
 output_file="cookies.txt"
 
-# Loop to send 100 requests
+rm "$output_file"
+
+# Loop to send n requests
 for ((i=1; i<=$1; i++))
 do
     # Sending a request to the URL
