@@ -21,7 +21,7 @@ def upload(source, destination):
         for l in source_file.readlines():
             output_command+=l
         
-    output_command = output_command.replace('\n', '')
+    output_command = output_command
     output_command+='\" > '+destination
     execute_remotely(output_command)
 
