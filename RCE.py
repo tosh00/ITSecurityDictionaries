@@ -41,11 +41,11 @@ while 1:
         break
     if command.split(' ')[0] == 'cd':
         path = cd(command)
-    if command.split(' ')[0] == 'upload':
+    elif command.split(' ')[0] == 'upload':
         source_file = command.split(' ')[1]
         destination_file = command.split(' ')[2]
         upload(source_file, destination_file)
-    if command.split(' ')[0] == 'download':
+    elif command.split(' ')[0] == 'download':
         source_file = command.split(' ')[1]
         destination_file = command.split(' ')[2]
         download(source_file, destination_file)
